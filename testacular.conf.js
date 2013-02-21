@@ -13,8 +13,8 @@ files = [
   'vendor/angular.js',
   'vendor/angular-*.js',
   'test/vendor/angular-mocks.js',
-  'lib/*.coffee',
-  'test/*.coffee'
+  'dist/*.js',
+  'test/*.js'
 ];
 
 
@@ -28,6 +28,8 @@ exclude = [
 // possible values: 'dots', 'progress', 'junit'
 reporters = ['progress', 'coverage'];
 
+//For if we want coverage report on terminal
+//coverageReporter = { type : 'text' };
 
 // web server port
 port = 8080;
@@ -58,7 +60,7 @@ autoWatch = true;
 // - Safari (only Mac)
 // - PhantomJS
 // - IE (only Windows)
-browsers = ['PhantomJS', 'Chrome', 'Firefox', 'Opera'];
+browsers = ['PhantomJS'];//, 'Chrome', 'Firefox', 'Opera'];
 
 
 // If browser does not capture in given timeout [ms], kill it
@@ -71,6 +73,5 @@ singleRun = false;
 
 //Get me some coffee and some coverage
 preprocessors = {
-  '**/*.coffee': 'coffee',
-  '**/lib/*.js': 'coverage'
+  '**/dist/*.js': 'coverage'
 }
