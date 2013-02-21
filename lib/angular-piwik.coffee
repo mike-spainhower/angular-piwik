@@ -69,25 +69,27 @@ mod.factory 'Piwik', [
     $window['_paq'] = $window['_paq'] || []
 
     class Piwik
+      _self = @
       #Attach methods that change state
       for method in PiwikActionMethods
-        @[method] = ->
-          cmd.push method
-          cmd.push arg for arg in arguments
-          _paq.push cmd
+        do (method) ->
+          _self[method] = ->
+            cmd = [method]
+            cmd.push arg for arg in arguments
+            $window['_paq'].push cmd
 
       #attach methods that retrieve state
       for method in PiwikGetMethods
-        @[method] = ->
-          deferred = $q.defer()
-          _args = arguments
-          _method = method
+        do (method) ->
+          _self[method] = ->
+            deferred = $q.defer()
+            _args = arguments
 
-          _paq.push ->
-            try
-              deferred.resolve @[_method].apply(@, _args)
-            catch e
-              deferred.reject e
-            
-          return deferred.promise
+            $window['_paq'].push ->
+              try
+                deferred.resolve @[method].apply(@, _args)
+              catch e
+                deferred.reject e
+              
+            return deferred.promise
 ]
