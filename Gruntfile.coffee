@@ -4,7 +4,7 @@ module.exports = (grunt) ->
     watch:
       scripts:
         files: '**/*.coffee'
-        tasks: ['coffeelint', 'coffee']
+        tasks: ['coffeelint', 'coffee', 'testacular']
     coffee:
       compile:
         files:
@@ -22,8 +22,10 @@ module.exports = (grunt) ->
       unit:
         options:
           configFile: 'testacular.conf.js'
+          browsers: if process.env.TRAVIS then ['Firefox'] else ['PhantomJS']
           autoWatch: yes
           keepalive: yes
+          singleRun: yes
     testacularRun:
       unit:
         options:
@@ -33,3 +35,5 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-coffeelint'
+
+  grunt.registerTask('default', ['coffeelint', 'coffee', 'testacular'])
