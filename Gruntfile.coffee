@@ -22,7 +22,7 @@ module.exports = (grunt) ->
       unit:
         options:
           configFile: 'testacular.conf.js'
-          browsers: if process.env.TRAVIS then ['Firefox'] else ['PhantomJS']
+          browsers: if process.env.TRAVIS then ['Firefox', 'PhantomJS'] else ['PhantomJS']
           autoWatch: yes
           keepalive: yes
           singleRun: yes
