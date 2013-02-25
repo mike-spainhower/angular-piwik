@@ -1,6 +1,4 @@
-# angular-piwik
-
-[![Build Status](https://travis-ci.org/mike-spainhower/angular-piwik.png?branch=master)](https://travis-ci.org/mike-spainhower/angular-piwik)
+# angular-piwik  [![Build Status](https://travis-ci.org/mike-spainhower/angular-piwik.png?branch=master)](https://travis-ci.org/mike-spainhower/angular-piwik)
 
 Angular service for piwik tracking
 
@@ -14,7 +12,8 @@ stub (bower directions)
 
 ### Build
 
-stub
+  npm install -g testacular@canary grunt
+  grunt
 
 ### Use
 
