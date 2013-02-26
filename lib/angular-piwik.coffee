@@ -93,3 +93,58 @@ mod.factory 'Piwik', [
               
             return deferred.promise
 ]
+
+
+
+mod.directive 'ngpPiwik', [
+  '$window'
+  'Piwik'
+  'PiwikActionMethods'
+
+  ($window, Piwik, PiwikActionMethods) ->
+    $window['_paq'] = $window['_paq'] || []
+    arr_param_methods = [
+      'setDomains'
+      'setDownloadClasses'
+      'setIgnoreClasses'
+      'setLinkClasses'
+    ]
+    comma_regex = /,/g
+    comma_regex.compile comma_regex
+    
+    build_p_call = (method, attr_val) ->
+      call = [method]
+      if ((method in arr_param_methods) and comma_regex.test(attr_val))
+        call.push attr_val.split(',')
+      else
+        call.push param for param in attr_val.split(',')
+      return call
+      
+    dir_def_obj =
+      restrict: 'EM'
+      replace: yes
+      transclue: yes
+      scope:
+        piwikUrl: '@ngpSetJsUrl'
+      template: """<script type='text/javascript' src='{{piwikUrl}}'>
+                    </script>"""
+      link: (scope, elem, attrs) ->
+        for own k,v of attrs when /^ngp/.test(k)
+          do (k,v) ->
+            method = k[3].toLowerCase() + k[4..]
+            return if not (method in PiwikActionMethods)
+            $window['_paq'].push build_p_call(method, v)
+            attrs.$observe k, (val) ->
+              $window['_paq'].push build_p_call(method, val)
+
+        $window['_paq'].push ['trackPageView']
+
+    return dir_def_obj
+]
+
+
+
+
+
+
+
