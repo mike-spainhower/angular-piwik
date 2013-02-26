@@ -9,7 +9,7 @@ module.exports = (grunt) ->
       compile:
         files:
           'dist/angular-piwik.js': ['lib/angular-piwik.coffee']
-          'test/ang-piwik-tests.js': ['test/servicesSpec.coffee']
+          'test/ang-piwik-tests.js': ['test/servicesSpec.coffee', 'test/directivesSpec.coffee']
     coffeelint:
       app: ['lib/*.coffee']
       tests: 
