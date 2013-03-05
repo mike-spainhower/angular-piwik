@@ -15,7 +15,7 @@ Angular-piwik provides the methods of the piwik javascript tracker for angular p
 or in your component.json
 
     "dependencies": {
-      "angular": "~1.0.0"
+      "angular-piwik": "~1.0.0"
       ...
     }
 
