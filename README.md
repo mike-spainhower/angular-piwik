@@ -44,7 +44,7 @@ Once this element is present in the page, you may inject the <code>Piwik</code> 
 
 ### Build
 
-    # npm install -g testacular@canary grunt
+    # npm install -g testacular@canary grunt-cli
     # grunt
 
 ### See Also
