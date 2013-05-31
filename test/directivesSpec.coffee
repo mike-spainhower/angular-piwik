@@ -28,10 +28,13 @@ describe 'Piwik Directives', ->
     return
 
 
-  it 'should create script element', ->
+  it 'should create one script element', ->
     scr_elm = angular.element(document).find('script')
-    expect(scr_elm.length).toBe(1)
-    expect(scr_elm.attr('src')).toEqual("https://piwik.test.com/piwik.js")
+    url = "https://piwik.test.com/piwik.js"
+    found = []
+    found.push elem if elem.src is url for elem in scr_elm
+    expect(found.length).toBe 1
+    expect(found[0]?.src).toEqual url
 
   it 'should create call queue', ->
     expect(win['_paq']).toBeDefined()
