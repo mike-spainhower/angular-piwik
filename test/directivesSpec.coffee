@@ -13,10 +13,10 @@ describe 'Piwik Directives', ->
     inject ($rootScope, $compile, $window) ->
       elm = angular.element '''<div>
         <ngp-piwik
-          ngp-set-js-url="https://piwik.personal.com/piwik.js"
-          ngp-set-tracker-url="https://piwik.personal.com/piwik.php"
+          ngp-set-js-url="https://piwik.test.com/piwik.js"
+          ngp-set-tracker-url="https://piwik.test.com/piwik.php"
           ngp-set-site-id="42"
-          ngp-set-domains="www.personal.com,demo.personal.com">
+          ngp-set-domains="www.test.com,demo.test.com">
         </ngp-piwik>
       </div>'''
       scope = $rootScope
@@ -29,9 +29,9 @@ describe 'Piwik Directives', ->
 
 
   it 'should create script element', ->
-    scr_elm = elm.find('script')
+    scr_elm = angular.element(document).find('script')
     expect(scr_elm.length).toBe(1)
-    expect(scr_elm.attr('src')).toEqual("https://piwik.personal.com/piwik.js")
+    expect(scr_elm.attr('src')).toEqual("https://piwik.test.com/piwik.js")
 
   it 'should create call queue', ->
     expect(win['_paq']).toBeDefined()
@@ -41,7 +41,7 @@ describe 'Piwik Directives', ->
     cmd = shift_until win['_paq'], 'setTrackerUrl'
     expect(cmd.length).toEqual(2)
     expect(cmd[0]).toEqual('setTrackerUrl')
-    expect(cmd[1]).toEqual('https://piwik.personal.com/piwik.php')
+    expect(cmd[1]).toEqual('https://piwik.test.com/piwik.php')
 
     cmd = shift_until win['_paq'], 'trackPageView'
     expect(cmd[0]).toEqual('trackPageView')
@@ -58,5 +58,5 @@ describe 'Piwik Directives', ->
   it 'should recognize and process arrays', ->
     cmd = win['_paq'].shift() until cmd?[0] == 'setDomains'
     expect(cmd[1].length).toBe(2)
-    expect(cmd[1][0]).toEqual('www.personal.com')
-    expect(cmd[1][1]).toEqual('demo.personal.com')
+    expect(cmd[1][0]).toEqual('www.test.com')
+    expect(cmd[1][1]).toEqual('demo.test.com')
