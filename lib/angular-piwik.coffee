@@ -122,13 +122,13 @@ mod.directive 'ngpPiwik', [
       return call
       
     dir_def_obj =
-      restrict: 'EM'
+      restrict: 'E'
       replace: no
-      transclue: yes
+      transclude: yes
       compile: (tElement, tAttrs, transclude) ->
-        $document.find('body').append """
-<script src="#{tAttrs.ngpSetJsUrl}" type="text/javascript"></script>
-"""
+        script_elem = $document[0].createElement 'script'
+        script_elem.setAttribute 'src', tAttrs.ngpSetJsUrl
+        $document[0].body.appendChild script_elem
 
         return {
           post: (scope, elem, attrs) ->
