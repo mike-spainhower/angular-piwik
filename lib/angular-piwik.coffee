@@ -98,10 +98,11 @@ mod.factory 'Piwik', [
 
 mod.directive 'ngpPiwik', [
   '$window'
+  '$document'
   'Piwik'
   'PiwikActionMethods'
 
-  ($window, Piwik, PiwikActionMethods) ->
+  ($window, $document, Piwik, PiwikActionMethods) ->
     $window['_paq'] = $window['_paq'] || []
     arr_param_methods = [
       'setDomains'
@@ -122,22 +123,25 @@ mod.directive 'ngpPiwik', [
       
     dir_def_obj =
       restrict: 'EM'
-      replace: yes
+      replace: no
       transclue: yes
-      scope:
-        piwikUrl: '@ngpSetJsUrl'
-      template: """<script type='text/javascript' src='{{piwikUrl}}'>
-                    </script>"""
-      link: (scope, elem, attrs) ->
-        for own k,v of attrs when /^ngp/.test(k)
-          do (k,v) ->
-            method = k[3].toLowerCase() + k[4..]
-            return if not (method in PiwikActionMethods)
-            $window['_paq'].push build_p_call(method, v)
-            attrs.$observe k, (val) ->
-              $window['_paq'].push build_p_call(method, val)
+      compile: (tElement, tAttrs, transclude) ->
+        $document.find('body').append """
+<script src="#{tAttrs.ngpSetJsUrl}" type="text/javascript"></script>
+"""
 
-        $window['_paq'].push ['trackPageView']
+        return {
+          post: (scope, elem, attrs) ->
+            for own k,v of attrs when /^ngp/.test(k)
+              do (k,v) ->
+                method = k[3].toLowerCase() + k[4..]
+                return if not (method in PiwikActionMethods)
+                $window['_paq'].push build_p_call(method, v)
+                attrs.$observe k, (val) ->
+                  $window['_paq'].push build_p_call(method, val)
+
+            $window['_paq'].push ['trackPageView']
+        }
 
     return dir_def_obj
 ]
