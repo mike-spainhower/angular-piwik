@@ -25,7 +25,7 @@ or in your bower.json (manual)
 
 ###Manual
 
-Grab <code>angular-piwik.js</code> from https://github.com/mike-spainhower/bower-angular-piwik
+Grab <code>angular-piwik.js</code> from https://github.com/mike-spainhower/angular-piwik/raw/master/dist/angular-piwik.js
 
 
 ## Use
