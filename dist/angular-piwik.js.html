@@ -181,16 +181,16 @@
     <h1>Code coverage report for <span class='entity'>dist/angular-piwik.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>94.81% <small>(73 / 77)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class='metric'>94.94% <small>(75 / 79)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Branches: <span class='metric'>70% <small>(14 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class='metric'>94.12% <small>(16 / 17)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class='metric'>94.44% <small>(17 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>98.63% <small>(72 / 73)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class='metric'>98.67% <small>(74 / 75)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
     </h2>
     <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">dist/</a> &#187; angular-piwik.js</div>
@@ -323,7 +323,8 @@
 124
 125
 126
-127</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+127
+128</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
@@ -419,15 +420,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5</span>
 <span class="cline-any cline-yes">5</span>
-<span class="cline-any cline-yes">60</span>
 <span class="cline-any cline-yes">45</span>
-<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">30</span>
+<span class="cline-any cline-yes">30</span>
 <span class="cline-any cline-yes">20</span>
 <span class="cline-any cline-yes">20</span>
 <span class="cline-any cline-yes">20</span>
@@ -442,6 +442,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5</span>
@@ -520,7 +522,7 @@
   ]);
 &nbsp;
   mod.directive('ngpPiwik', [
-    '$window', 'Piwik', 'PiwikActionMethods', function($window, Piwik, PiwikActionMethods) {
+    '$window', '$document', 'Piwik', 'PiwikActionMethods', function($window, $document, Piwik, PiwikActionMethods) {
       var arr_param_methods, build_p_call, comma_regex, dir_def_obj;
       $window['_paq'] = $window['_paq'] || <span class="branch-1 cbranch-no" title="branch not covered" >[];</span>
       arr_param_methods = ['setDomains', 'setDownloadClasses', 'setIgnoreClasses', 'setLinkClasses'];
@@ -542,32 +544,33 @@
       };
       dir_def_obj = {
         restrict: 'EM',
-        replace: true,
+        replace: false,
         transclue: true,
-        scope: {
-          piwikUrl: '@ngpSetJsUrl'
-        },
-        template: "&lt;script type='text/javascript' src='{{piwikUrl}}'&gt;\n&lt;/script&gt;",
-        link: function(scope, elem, attrs) {
-          var k, v;
-          for (k in attrs) {
-            if (!__hasProp.call(attrs, k)) continue;
-            v = attrs[k];
-            if (/^ngp/.test(k)) {
-              (function(k, v) {
-                var method;
-                method = k[3].toLowerCase() + k.slice(4);
-                if (!(__indexOf.call(PiwikActionMethods, method) &gt;= 0)) {
-                  return;
+        compile: function(tElement, tAttrs, transclude) {
+          $document.find('body').append("&lt;script src=\"" + tAttrs.ngpSetJsUrl + "\" type=\"text/javascript\"&gt;&lt;/script&gt;");
+          return {
+            post: function(scope, elem, attrs) {
+              var k, v;
+              for (k in attrs) {
+                if (!__hasProp.call(attrs, k)) continue;
+                v = attrs[k];
+                if (/^ngp/.test(k)) {
+                  (function(k, v) {
+                    var method;
+                    method = k[3].toLowerCase() + k.slice(4);
+                    if (!(__indexOf.call(PiwikActionMethods, method) &gt;= 0)) {
+                      return;
+                    }
+                    $window['_paq'].push(build_p_call(method, v));
+                    return attrs.$observe(k, function(val) {
+                      return $window['_paq'].push(build_p_call(method, val));
+                    });
+                  })(k, v);
                 }
-                $window['_paq'].push(build_p_call(method, v));
-                return attrs.$observe(k, function(val) {
-                  return $window['_paq'].push(build_p_call(method, val));
-                });
-              })(k, v);
+              }
+              return $window['_paq'].push(['trackPageView']);
             }
-          }
-          return $window['_paq'].push(['trackPageView']);
+          };
         }
       };
       return dir_def_obj;
@@ -580,7 +583,7 @@
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Mon Feb 25 2013 21:19:30 GMT-0500 (EST)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Fri May 31 2013 14:29:59 GMT-0400 (EDT)</div>
 </div>
 </body>
 
