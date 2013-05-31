@@ -90,11 +90,14 @@
         return call;
       };
       dir_def_obj = {
-        restrict: 'EM',
+        restrict: 'E',
         replace: false,
-        transclue: true,
+        transclude: true,
         compile: function(tElement, tAttrs, transclude) {
-          $document.find('body').append("<script src=\"" + tAttrs.ngpSetJsUrl + "\" type=\"text/javascript\"></script>");
+          var script_elem;
+          script_elem = $document[0].createElement('script');
+          script_elem.setAttribute('src', tAttrs.ngpSetJsUrl);
+          $document[0].body.appendChild(script_elem);
           return {
             post: function(scope, elem, attrs) {
               var k, v;
