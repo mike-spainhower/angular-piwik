@@ -12,7 +12,11 @@ Angular-piwik provides the methods of the piwik javascript tracker for angular p
 
     # bower install angular-piwik
     
-or in your component.json
+or in your bower.json (auto)
+
+    #bower install --save angular-piwik
+
+or in your bower.json (manual)
 
     "dependencies": {
       "angular-piwik": "~1.0.0"
