@@ -101,6 +101,7 @@
           return {
             post: function(scope, elem, attrs) {
               var k, v;
+              var cacheActionValues = {};
               for (k in attrs) {
                 if (!__hasProp.call(attrs, k)) continue;
                 v = attrs[k];
@@ -111,9 +112,13 @@
                     if (!(__indexOf.call(PiwikActionMethods, method) >= 0)) {
                       return;
                     }
+                    cacheActionValues[method] = v;
                     $window['_paq'].push(build_p_call(method, v));
                     return attrs.$observe(k, function(val) {
-                      return $window['_paq'].push(build_p_call(method, val));
+                      if(cacheActionValues[method] !== val){
+                        cacheActionValues[method] = val;
+                        return $window['_paq'].push(build_p_call(method, val));
+                      }
                     });
                   })(k, v);
                 }
