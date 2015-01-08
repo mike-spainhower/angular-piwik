@@ -120,6 +120,7 @@ describe 'Piwik Service', ->
     expect(typeof piwik.trackGoal).toEqual 'function'
     expect(typeof piwik.trackLink).toEqual 'function'
     expect(typeof piwik.trackPageView).toEqual 'function'
+    expect(typeof piwik.trackEvent).toEqual 'function'
     expect(typeof piwik.setEcommerceView).toEqual 'function'
     expect(typeof piwik.addEcommerceItem).toEqual 'function'
     expect(typeof piwik.trackEcommerceOrder).toEqual 'function'
