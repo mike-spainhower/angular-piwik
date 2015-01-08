@@ -3,6 +3,7 @@
 mod = angular.module 'piwik', []
 
 mod.factory 'PiwikActionMethods', -> [
+  'trackEvent'
   'setTrackerUrl'
   'setSiteId'
   'setCustomData'
