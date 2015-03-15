@@ -43,6 +43,7 @@ mod.factory 'PiwikActionMethods', -> [
   'addEcommerceItem'
   'trackEcommerceOrder'
   'trackEcommerceCartUpdate'
+  'setUserId'
 ]
 
 mod.factory 'PiwikGetMethods', -> [
