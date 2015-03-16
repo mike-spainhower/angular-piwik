@@ -124,3 +124,4 @@ describe 'Piwik Service', ->
     expect(typeof piwik.addEcommerceItem).toEqual 'function'
     expect(typeof piwik.trackEcommerceOrder).toEqual 'function'
     expect(typeof piwik.trackEcommerceCartUpdate).toEqual 'function'
+    expect(typeof piwik.setUserId).toEqual 'function'
