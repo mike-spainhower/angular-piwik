@@ -38,6 +38,7 @@ mod.factory 'PiwikActionMethods', -> [
   'setCountPreRendered'
   'trackGoal'
   'trackLink'
+  'trackEvent'
   'trackPageView'
   'setEcommerceView'
   'addEcommerceItem'

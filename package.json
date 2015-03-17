@@ -1,6 +1,6 @@
 {
   "name": "angular-piwik",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "devDependencies": {
     "grunt": "~0.4.0",
     "testacular": "~0.4.0",
