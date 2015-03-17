@@ -23,9 +23,13 @@ or in your bower.json (manual)
       ...
     }
 
+### CDN
+
+Point to the release on Github's CDN - https://cdn.rawgit.com/mike-spainhower/angular-piwik/v1.2.0/dist/angular-piwik.js
+
 ###Manual
 
-Grab <code>angular-piwik.js</code> from https://github.com/mike-spainhower/angular-piwik/raw/master/dist/angular-piwik.js
+Grab `angular-piwik.js` from https://github.com/mike-spainhower/angular-piwik/raw/master/dist/angular-piwik.js
 
 
 ## Use
