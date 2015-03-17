@@ -117,6 +117,7 @@ describe 'Piwik Service', ->
     expect(typeof piwik.killFrame).toEqual 'function'
     expect(typeof piwik.redirectFile).toEqual 'function'
     expect(typeof piwik.setCountPreRendered).toEqual 'function'
+    expect(typeof piwik.trackEvent).toEqual 'function'
     expect(typeof piwik.trackGoal).toEqual 'function'
     expect(typeof piwik.trackLink).toEqual 'function'
     expect(typeof piwik.trackPageView).toEqual 'function'
