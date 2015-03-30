@@ -46,7 +46,7 @@ Add to page:
 
 Attributes prefixed with <code>ngp-</code> are Piwik Javascript tracker methods, just dash-separated rather than camel cased.  All Piwik tracker methods are supported.
 
-Once this element is present in the page, you may inject the <code>Piwik</code> service into your controllers.  The Piwik object has all the same methods as the official Piwik js tracker.
+Once this element is present in the page, you may inject the <code>Piwik</code> service into your controllers.  The Piwik service object has all the same methods as the tracker returned by `getTracker` or `getAsyncTracker` on the raw `Piwik` object.
 
 ## Errata
 
