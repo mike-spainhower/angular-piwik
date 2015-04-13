@@ -94,11 +94,13 @@
         replace: false,
         transclude: true,
         compile: function(tElement, tAttrs, transclude) {
-          var script_elem;
-          script_elem = $document[0].createElement('script');
-          script_elem.setAttribute('src', tAttrs.ngpSetJsUrl);
-          $document[0].body.appendChild(script_elem);
           return {
+            pre: function(scope, elem, attrs) {
+              var script_elem;
+              script_elem = $document[0].createElement('script');
+              script_elem.setAttribute('src', attrs.ngpSetJsUrl);
+              return $document[0].body.appendChild(script_elem);
+            },
             post: function(scope, elem, attrs) {
               var k, v;
               for (k in attrs) {
