@@ -46,7 +46,7 @@ describe 'Piwik Service', ->
     val = piwik.getVisitorId()
     expect(val).toEqual 'sentinel'
     expect(q.defer).toHaveBeenCalled()
-    
+
     mock['_paq'].pop().apply (new Pt())
     expect(getVisitorId).toHaveBeenCalled()
     expect(q.resolve).toHaveBeenCalledWith(2)
@@ -63,7 +63,7 @@ describe 'Piwik Service', ->
     val = piwik.getVisitorId()
     expect(val).toEqual 'sentinel'
     expect(q.defer).toHaveBeenCalled()
-    
+
     mock['_paq'].pop().apply (new Pt())
     expect(err_fn.getVisitorId).toHaveBeenCalled()
     expect(q.reject).toHaveBeenCalledWith(e)
@@ -81,6 +81,10 @@ describe 'Piwik Service', ->
     expect(typeof piwik.getAttributionReferrerUrl).toEqual 'function'
     expect(typeof piwik.getCustomData).toEqual 'function'
     expect(typeof piwik.getCustomVariable).toEqual 'function'
+    expect(typeof piwik.getTrackerUrl).toEqual 'function'
+    expect(typeof piwik.getSiteId).toEqual 'function'
+    expect(typeof piwik.getUserId).toEqual 'function'
+    expect(typeof piwik.getRequest).toEqual 'function'
 
   it 'should support action methods', ->
     expect(typeof piwik.setTrackerUrl).toEqual 'function'
@@ -126,3 +130,21 @@ describe 'Piwik Service', ->
     expect(typeof piwik.trackEcommerceOrder).toEqual 'function'
     expect(typeof piwik.trackEcommerceCartUpdate).toEqual 'function'
     expect(typeof piwik.setUserId).toEqual 'function'
+    expect(typeof piwik.setCustomRequestProcessing).toEqual 'function'
+    expect(typeof piwik.appendToTrackingUrl).toEqual 'function'
+    expect(typeof piwik.addPlugin).toEqual 'function'
+    expect(typeof piwik.storeCustomVariablesInCookie).toEqual 'function'
+    expect(typeof piwik.setRequestContentType).toEqual 'function'
+    expect(typeof piwik.setAPIUrl).toEqual 'function'
+    expect(typeof piwik.disableCookies).toEqual 'function'
+    expect(typeof piwik.deleteCookies).toEqual 'function'
+    expect(typeof piwik.enableJSErrorTracking).toEqual 'function'
+    expect(typeof piwik.disablePerformanceTracking).toEqual 'function'
+    expect(typeof piwik.setGenerationTimeMs).toEqual 'function'
+    expect(typeof piwik.trackAllContentImpressions).toEqual 'function'
+    expect(typeof piwik.trackVisibleContentImpressions).toEqual 'function'
+    expect(typeof piwik.trackContentImpression).toEqual 'function'
+    expect(typeof piwik.trackContentImpressionsWithinNode).toEqual 'function'
+    expect(typeof piwik.trackContentInteraction).toEqual 'function'
+    expect(typeof piwik.trackContentInteractionNode).toEqual 'function'
+    expect(typeof piwik.trackSiteSearch).toEqual 'function'

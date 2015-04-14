@@ -45,6 +45,24 @@ mod.factory 'PiwikActionMethods', -> [
   'trackEcommerceOrder'
   'trackEcommerceCartUpdate'
   'setUserId'
+  'setCustomRequestProcessing'
+  'appendToTrackingUrl'
+  'addPlugin'
+  'storeCustomVariablesInCookie'
+  'setRequestContentType'
+  'setAPIUrl'
+  'disableCookies'
+  'deleteCookies'
+  'enableJSErrorTracking'
+  'disablePerformanceTracking'
+  'setGenerationTimeMs'
+  'trackAllContentImpressions'
+  'trackVisibleContentImpressions'
+  'trackContentImpression'
+  'trackContentImpressionsWithinNode'
+  'trackContentInteraction'
+  'trackContentInteractionNode'
+  'trackSiteSearch'
 ]
 
 mod.factory 'PiwikGetMethods', -> [
@@ -57,7 +75,10 @@ mod.factory 'PiwikGetMethods', -> [
   'getAttributionReferrerUrl'
   'getCustomData'
   'getCustomVariable'
-
+  'getTrackerUrl'
+  'getSiteId'
+  'getUserId'
+  'getRequest'
 ]
 
 mod.factory 'Piwik', [
@@ -67,7 +88,7 @@ mod.factory 'Piwik', [
   'PiwikGetMethods'
 
   ($q, $window, PiwikActionMethods, PiwikGetMethods) ->
-    
+
     $window['_paq'] = $window['_paq'] || []
 
     class Piwik
@@ -92,7 +113,7 @@ mod.factory 'Piwik', [
                 deferred.resolve @[method].apply(@, _args)
               catch e
                 deferred.reject e
-              
+
             return deferred.promise
 ]
 
