@@ -143,17 +143,18 @@ mod.directive 'ngpPiwik', [
       else
         call.push param for param in attr_val.split(',')
       return call
-      
+
     dir_def_obj =
       restrict: 'E'
       replace: no
       transclude: yes
       compile: (tElement, tAttrs, transclude) ->
-        script_elem = $document[0].createElement 'script'
-        script_elem.setAttribute 'src', tAttrs.ngpSetJsUrl
-        $document[0].body.appendChild script_elem
-
         return {
+          pre: (scope, elem, attrs) ->
+            script_elem = $document[0].createElement 'script'
+            script_elem.setAttribute 'src', attrs.ngpSetJsUrl
+            $document[0].body.appendChild script_elem
+
           post: (scope, elem, attrs) ->
             for own k,v of attrs when /^ngp/.test(k)
               do (k,v) ->
