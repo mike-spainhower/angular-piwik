@@ -133,9 +133,9 @@ mod.directive 'ngpPiwik', [
       'setIgnoreClasses'
       'setLinkClasses'
     ]
-    comma_regex = /,/g
+    comma_regex = /,/
     comma_regex.compile comma_regex
-    
+
     build_p_call = (method, attr_val) ->
       call = [method]
       if ((method in arr_param_methods) and comma_regex.test(attr_val))

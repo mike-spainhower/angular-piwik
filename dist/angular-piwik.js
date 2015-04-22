@@ -73,7 +73,7 @@
       var arr_param_methods, build_p_call, comma_regex, dir_def_obj;
       $window['_paq'] = $window['_paq'] || [];
       arr_param_methods = ['setDomains', 'setDownloadClasses', 'setIgnoreClasses', 'setLinkClasses'];
-      comma_regex = /,/g;
+      comma_regex = /,/;
       comma_regex.compile(comma_regex);
       build_p_call = function(method, attr_val) {
         var call, param, _i, _len, _ref;
