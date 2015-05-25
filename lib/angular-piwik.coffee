@@ -133,9 +133,9 @@ mod.directive 'ngpPiwik', [
       'setIgnoreClasses'
       'setLinkClasses'
     ]
-    comma_regex = /,/g
+    comma_regex = /,/
     comma_regex.compile comma_regex
-    
+
     build_p_call = (method, attr_val) ->
       call = [method]
       if ((method in arr_param_methods) and comma_regex.test(attr_val))
@@ -143,7 +143,16 @@ mod.directive 'ngpPiwik', [
       else
         call.push param for param in attr_val.split(',')
       return call
-      
+
+    push_paq = (method, attr_val) ->
+      pcall = build_p_call(method, attr_val)
+      existingPaq = (item for item in $window['_paq'] when item[0] is method)
+      if(existingPaq.length > 0)
+        for value, index in pcall
+          existingPaq[0][index] = value
+      else
+        $window['_paq'].push pcall
+
     dir_def_obj =
       restrict: 'E'
       replace: no
@@ -159,19 +168,13 @@ mod.directive 'ngpPiwik', [
               do (k,v) ->
                 method = k[3].toLowerCase() + k[4..]
                 return if not (method in PiwikActionMethods)
-                $window['_paq'].push build_p_call(method, v)
+                push_paq(method, v)
+
                 attrs.$observe k, (val) ->
-                  $window['_paq'].push build_p_call(method, val)
+                  push_paq(method, val)
 
             $window['_paq'].push ['trackPageView']
         }
 
     return dir_def_obj
 ]
-
-
-
-
-
-
-

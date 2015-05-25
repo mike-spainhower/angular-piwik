@@ -70,10 +70,10 @@
 
   mod.directive('ngpPiwik', [
     '$window', '$document', 'Piwik', 'PiwikActionMethods', function($window, $document, Piwik, PiwikActionMethods) {
-      var arr_param_methods, build_p_call, comma_regex, dir_def_obj;
+      var arr_param_methods, build_p_call, comma_regex, dir_def_obj, push_paq;
       $window['_paq'] = $window['_paq'] || [];
       arr_param_methods = ['setDomains', 'setDownloadClasses', 'setIgnoreClasses', 'setLinkClasses'];
-      comma_regex = /,/g;
+      comma_regex = /,/;
       comma_regex.compile(comma_regex);
       build_p_call = function(method, attr_val) {
         var call, param, _i, _len, _ref;
@@ -88,6 +88,32 @@
           }
         }
         return call;
+      };
+      push_paq = function(method, attr_val) {
+        var existingPaq, index, item, pcall, value, _i, _len, _results;
+        pcall = build_p_call(method, attr_val);
+        existingPaq = (function() {
+          var _i, _len, _ref, _results;
+          _ref = $window['_paq'];
+          _results = [];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            item = _ref[_i];
+            if (item[0] === method) {
+              _results.push(item);
+            }
+          }
+          return _results;
+        })();
+        if (existingPaq.length > 0) {
+          _results = [];
+          for (index = _i = 0, _len = pcall.length; _i < _len; index = ++_i) {
+            value = pcall[index];
+            _results.push(existingPaq[0][index] = value);
+          }
+          return _results;
+        } else {
+          return $window['_paq'].push(pcall);
+        }
       };
       dir_def_obj = {
         restrict: 'E',
@@ -111,9 +137,9 @@
                     if (!(__indexOf.call(PiwikActionMethods, method) >= 0)) {
                       return;
                     }
-                    $window['_paq'].push(build_p_call(method, v));
+                    push_paq(method, v);
                     return attrs.$observe(k, function(val) {
-                      return $window['_paq'].push(build_p_call(method, val));
+                      return push_paq(method, val);
                     });
                   })(k, v);
                 }

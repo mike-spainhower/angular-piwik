@@ -38,7 +38,7 @@ describe 'Piwik Directives', ->
 
   it 'should create call queue', ->
     expect(win['_paq']).toBeDefined()
-    expect(win['_paq'].length).toEqual(7)
+    expect(win['_paq'].length).toEqual(4)
 
   it 'should place trackerUrl on call queue before trackPageView', ->
     cmd = shift_until win['_paq'], 'setTrackerUrl'
