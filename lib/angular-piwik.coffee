@@ -154,7 +154,7 @@ mod.directive 'ngpPiwik', [
         $window['_paq'].push pcall
 
     dir_def_obj =
-      restrict: 'E'
+      restrict: 'EA'
       replace: no
       transclude: yes
       compile: (tElement, tAttrs, transclude) ->
