@@ -1,6 +1,6 @@
 {
   "name": "angular-piwik",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "scripts": {
     "test": "grunt"
   },
@@ -12,5 +12,33 @@
     "grunt-contrib-coffee": "~0.4.0",
     "grunt-contrib-watch": "~0.2.0",
     "grunt-coffeelint": "0.0.5"
-  }
+  },
+  "description": "Angular service for piwik tracking",
+  "main": "dist/angular-piwik.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-coffeelint": "^0.0.5",
+    "grunt-contrib-coffee": "^0.4.0",
+    "grunt-contrib-watch": "^0.2.0",
+    "grunt-testacular": "^0.3.0",
+    "testacular": "^0.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mike-spainhower/angular-piwik.git"
+  },
+  "keywords": [
+    "angular",
+    "piwik",
+    "analytics"
+  ],
+  "author": "spaintrain <mcspainhower+npm@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mike-spainhower/angular-piwik/issues"
+  },
+  "homepage": "https://github.com/mike-spainhower/angular-piwik#readme"
 }
