@@ -116,7 +116,7 @@
         }
       };
       dir_def_obj = {
-        restrict: 'E',
+        restrict: 'EA',
         replace: false,
         transclude: true,
         compile: function(tElement, tAttrs, transclude) {
