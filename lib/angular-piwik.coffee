@@ -122,10 +122,11 @@ mod.factory 'Piwik', [
 mod.directive 'ngpPiwik', [
   '$window'
   '$document'
+  '$interpolate'
   'Piwik'
   'PiwikActionMethods'
 
-  ($window, $document, Piwik, PiwikActionMethods) ->
+  ($window, $document, $interpolate, Piwik, PiwikActionMethods) ->
     $window['_paq'] = $window['_paq'] || []
     arr_param_methods = [
       'setDomains'
@@ -158,11 +159,12 @@ mod.directive 'ngpPiwik', [
       replace: no
       transclude: yes
       compile: (tElement, tAttrs, transclude) ->
-        script_elem = $document[0].createElement 'script'
-        script_elem.setAttribute 'src', tAttrs.ngpSetJsUrl
-        $document[0].body.appendChild script_elem
-
         return {
+          pre: (scope, elem, attrs) ->
+            script_elem = $document[0].createElement 'script'
+            src = $interpolate(tAttrs.ngpSetJsUrl) scope
+            script_elem.setAttribute 'src', src
+            $document[0].body.appendChild script_elem
           post: (scope, elem, attrs) ->
             for own k,v of attrs when /^ngp/.test(k)
               do (k,v) ->
