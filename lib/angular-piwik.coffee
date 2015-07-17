@@ -159,13 +159,12 @@ mod.directive 'ngpPiwik', [
       replace: no
       transclude: yes
       compile: (tElement, tAttrs, transclude) ->
-        pre: (scope, elem, attrs) ->
-          script_elem = $document[0].createElement 'script'
-          src = $interpolate(tAttrs.ngpSetJsUrl) scope
-          script_elem.setAttribute 'src', src
-          $document[0].body.appendChild script_elem
-          return
         return {
+          pre: (scope, elem, attrs) ->
+            script_elem = $document[0].createElement 'script'
+            src = $interpolate(tAttrs.ngpSetJsUrl) scope
+            script_elem.setAttribute 'src', src
+            $document[0].body.appendChild script_elem
           post: (scope, elem, attrs) ->
             for own k,v of attrs when /^ngp/.test(k)
               do (k,v) ->
