@@ -148,3 +148,6 @@ describe 'Piwik Service', ->
     expect(typeof piwik.trackContentInteraction).toEqual 'function'
     expect(typeof piwik.trackContentInteractionNode).toEqual 'function'
     expect(typeof piwik.trackSiteSearch).toEqual 'function'
+    expect(typeof piwik.setCustomDimension).toEqual 'function'
+    expect(typeof piwik.deleteCustomDimension).toEqual 'function'
+    expect(typeof piwik.getCustomDimension).toEqual 'function'
