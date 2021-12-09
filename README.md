@@ -8,13 +8,13 @@ Angular-piwik provides the methods of the piwik javascript tracker for angular p
 
 ## Install
 
-###Bower
+### Bower
 
     # bower install angular-piwik
     
 or in your bower.json (auto)
 
-    #bower install --save angular-piwik
+    # bower install --save angular-piwik
 
 or in your bower.json (manual)
 
@@ -27,7 +27,7 @@ or in your bower.json (manual)
 
 Point to the release on Github's CDN - https://cdn.rawgit.com/mike-spainhower/angular-piwik/v1.2.0/dist/angular-piwik.js
 
-###Manual
+### Manual
 
 Grab `angular-piwik.js` from https://github.com/mike-spainhower/angular-piwik/raw/master/dist/angular-piwik.js
 
